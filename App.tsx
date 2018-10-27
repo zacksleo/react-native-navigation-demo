@@ -1,7 +1,7 @@
 import React from 'react';
 import { Component } from 'react';
 import { Platform, StyleSheet, Text, View } from 'react-native';
-import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
+import { createStackNavigator, createBottomTabNavigator, createSwitchNavigator } from 'react-navigation';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import HomeScreen from './pages/site/HomeScreen';
 import DetailsScreen from './pages/site/DetailsScreen';
@@ -9,6 +9,25 @@ import SettingsScreen from './pages/site/SettingsScreen';
 import ProfileScreen from './pages/site/ProfileScreen';
 import ModalScreen from './pages/site/ModalScreen';
 import NotificationScreen from './pages/site/NotificationScreen';
+import OtherScreen from './pages/site/OtherScreen';
+import SignInScreen from './pages/site/SignInScreen';
+import AuthLoadingScreen from './pages/site/AuthLoadingScreen';
+
+
+const AppStack = createStackNavigator({
+  Home: HomeScreen,
+  Other: OtherScreen
+});
+
+const AuthStack = createStackNavigator({
+  SignIn: SignInScreen
+});
+
+const SwitchStack = createSwitchNavigator({
+  AuthLoading: AuthLoadingScreen,
+  App: AppStack,
+  Auth: AuthStack
+});
 
 const HomeStack = createStackNavigator(
   {
@@ -77,7 +96,7 @@ type Props = {};
 export default class App extends Component<Props> {
   render() {
     return (
-      <TabNavigator />
+      <SwitchStack />
     );
   }
 }
